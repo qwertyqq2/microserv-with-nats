@@ -13,8 +13,10 @@
 Сервис реализует три запроса
 
      r.POST("/create_order", h.createOrder)
-	r.GET("/get_order", h.getOrder)
-	r.GET("/all", h.getLastOrders)
+	
+     r.GET("/get_order", h.getOrder)
+	
+     r.GET("/all", h.getLastOrders)
 
 Модель данных:
 
