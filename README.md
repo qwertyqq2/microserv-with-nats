@@ -7,7 +7,7 @@
 
      docker-compose up -d
 
-### Локально
+#### Локально
 
 Необходимо установить nats-streaming:0.25.5:, postgres:14
 
