@@ -42,7 +42,7 @@ func Registration(r *gin.Engine, s store.Store, conf broker.Config) error {
 
 	genIds := generateSubID()
 
-	for i := 0; i < 1; i++ {
+	for i := 0; i < 2; i++ {
 		sub, err := broker.NewSubscriber(
 			genIds(),
 			conf.Subject,
