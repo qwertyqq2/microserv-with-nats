@@ -1,0 +1,45 @@
+services:
+    db:
+        image: postgres:14
+        volumes:
+            - ./db:/var/lib/postgresql/data/pgdata  
+        ports:
+            - "5432:5432"
+        environment:
+            - POSTGRES_USER=user
+            - POSTGRES_DB=mydatabase
+            - POSTGRES_PASSWORD=12345
+            - PGDATA=/var/lib/postgresql/data/pgdata
+        
+
+    nats:
+        image: "nats-streaming:0.25.5"
+        ports:
+            - "8222:8222"
+        command: "--cluster_name test-cluster --cluster nats://0.0.0.0:8222 "
+
+    app:
+        build: 
+            context: "."
+            dockerfile: Dockerfile
+        ports:
+            - "8000:8000"
+        depends_on:
+            - nats
+            - db
+        command: go run main.go
+        environment:
+            - NATS_URL=nats://nats:4222
+            - CLASTER_ID=test-cluster
+            - SUBJECT=topek
+            - DB_PASSWORD=12345
+            - DB_USER=user
+            - DB_NAME=mydatabase
+            - DB_HOST=db
+            
+
+
+
+        
+
+  
